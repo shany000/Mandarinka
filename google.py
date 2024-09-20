@@ -9,7 +9,7 @@ def google_func(request):
 
     driver = webdriver.Chrome(options=option)
 
-    driver.get('https://www.google.com/search?q=Ютуб+мистер+бист')
+    driver.get('https://www.google.com/search?q=' + request)
 
     result = driver.find_element(By.CLASS_NAME, 'yuRUbf').find_element(By.TAG_NAME, 'a').get_attribute('href')
 
@@ -17,4 +17,3 @@ def google_func(request):
 
     webbrowser.open(result)
 
-    return result
