@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
-def google_func(request):
+def search(request):
     option = webdriver.ChromeOptions()
     option.add_argument('--headless=old')
 

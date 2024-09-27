@@ -1,18 +1,18 @@
-import google
-import os
+import io
+import browser
+
 import queue
 import sounddevice as sd
 import vosk
 
-def recognize_speech_vosk():
-    model_path = "models/vosk-model-small-ru-0.22"
-    if not os.path.exists(model_path):
-        print(f"Модель по пути '{model_path}' не найдена.")
-        return
+
+def Mandarinka(model_path):
 
     model = vosk.Model(model_path)
     audio_queue = queue.Queue()
     sample_rate = 16000
+
+    spoken_text = ""
 
     def callback(indata, frames, time, status):
         if status:
@@ -21,14 +21,13 @@ def recognize_speech_vosk():
 
     with sd.RawInputStream(samplerate=sample_rate, blocksize=8000, dtype='int16',
                            channels=1, callback=callback):
-        print("Говорите, я вас слушаю...")
 
-        recognizer = vosk.KaldiRecognizer(model, sample_rate)
+        print("Говорите")
 
-        while True:
-            data = audio_queue.get()
-            if recognizer.AcceptWaveform(data):
-                result = recognizer.Result()
-                text = result.split('"text" : ')[-1].strip('}').replace('"', '').strip()
-                print(f"Вы сказали: {text}")
-recognize_speech_vosk()
+        while spoken_text!= "пока":
+            recognizer = vosk.KaldiRecognizer(model, sample_rate)
+            spoken_text = io.listen_and_recognize(recognizer,audio_queue)
+            print(spoken_text)
+
+
+Mandarinka("models/vosk-model-small-ru-0.22")
