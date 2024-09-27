@@ -1,5 +1,6 @@
 import pyttsx3
 
+
 def speak(text):
     engine = pyttsx3.init()
     engine.setProperty('rate', 150)
@@ -11,7 +12,8 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
 
-def listen_and_recognize(recognizer,audio_queue):
+
+def listen_and_recognize(recognizer, audio_queue):
     while True:
         data = audio_queue.get()
         if recognizer.AcceptWaveform(data):

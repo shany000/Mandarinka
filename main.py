@@ -1,4 +1,4 @@
-import io
+import audio_io
 import browser
 
 import queue
@@ -6,7 +6,7 @@ import sounddevice as sd
 import vosk
 
 
-def Mandarinka(model_path):
+def mandarinka(model_path):
 
     model = vosk.Model(model_path)
     audio_queue = queue.Queue()
@@ -26,8 +26,8 @@ def Mandarinka(model_path):
 
         while spoken_text!= "пока":
             recognizer = vosk.KaldiRecognizer(model, sample_rate)
-            spoken_text = io.listen_and_recognize(recognizer,audio_queue)
+            spoken_text = audio_io.listen_and_recognize(recognizer,audio_queue)
             print(spoken_text)
 
 
-Mandarinka("models/vosk-model-small-ru-0.22")
+mandarinka("models/vosk-model-small-ru-0.22")
