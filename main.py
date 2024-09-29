@@ -22,12 +22,15 @@ def mandarinka(model_path):
     with sd.RawInputStream(samplerate=sample_rate, blocksize=8000, dtype='int16',
                            channels=1, callback=callback):
 
-        print("Говорите")
+        audio_io.speak("Говорите")
 
         while spoken_text!= "пока":
             recognizer = vosk.KaldiRecognizer(model, sample_rate)
             spoken_text = audio_io.listen_and_recognize(recognizer,audio_queue)
-            print(spoken_text)
+            if "браузер" in spoken_text:
+                audio_io.speak("Что вам открыть?")
+                browser.search(audio_io.listen_and_recognize(recognizer, audio_queue))
+            print("Спасибо за обращение)")
 
 
 mandarinka("models/vosk-model-small-ru-0.22")

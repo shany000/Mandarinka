@@ -20,4 +20,5 @@ def listen_and_recognize(recognizer, audio_queue):
             result = recognizer.Result()
             text = result.split('"text" : ')[-1].strip('}').replace('"', '').strip()
             if text:
+                print(text)
                 return text
