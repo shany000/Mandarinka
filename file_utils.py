@@ -27,3 +27,14 @@ def open_file_by_key(key):
             return f"Ошибка при открытии файла через ярлык: {e}"
     else:
         return f"Ярлык для ключа '{key}' не найден."
+
+def search_files(root_dir, query):
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        for file in filenames:
+            try:
+                if query.lower() in file.lower():
+                    print(f"Найден файл: {os.path.join(dirpath, file)}")
+            except PermissionError:
+                print(f"Нет доступа к: {dirpath}")
+            except Exception as e:
+                print(f"Ошибка: {e}")
